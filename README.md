@@ -42,5 +42,5 @@ const plainText = Cryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
 ## Notas de Atualizações
-### 1.0.1 ✅
+### 1.0.2 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
