@@ -18,29 +18,29 @@ npm install cryptoo
 Utilizando com Es6:
 
 ```javascript
-import Cryptoo from 'cryptoo';
+import Encryptoo from 'cryptoo';
 const localPublicKey = Cryptoo.init();
 ```
 
 Outro modo:
 
 ```javascript
-const Cryptoo = require('Cryptoo');
+const Encryptoo = require('Cryptoo');
 const localPublicKey = Cryptoo.init();
 ```
 
 ### Encrypt 🔒
 ```javascript
-import Cryptoo from 'cryptoo';
+import Encryptoo from 'cryptoo';
 const cryptogram = Cryptoo.encrypt(plainText, serverPublicKey);
 ```
 
 ### Decrypt 🔓
 ```javascript
-import Cryptoo from 'cryptoo';
+import Encyptoo from 'cryptoo';
 const plainText = Cryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
 ## Notas de Atualizações
-### 1.0.1 ✅
+### 1.0.2 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
