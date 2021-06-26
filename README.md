@@ -1,4 +1,4 @@
-# CryptoO 🔐
+# EncryptoO 🔐
 
 ### Uma lib de criptografia - Created by André Oliveira (@oliveira086)
 
@@ -42,5 +42,5 @@ const plainText = Cryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
 ## Notas de Atualizações
-### 1.0.0 ✅
+### 1.0.1 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
