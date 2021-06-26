@@ -1,6 +1,9 @@
 # EncryptoO 🔐
 
-### Uma lib de criptografia - Created by André Oliveira (@oliveira086)
+### Uma biblioteca de criptografia com troca de chaves embutida
+```
+Created by André Oliveira (@oliveira086)
+```
 
 ## Node.js (Install)
 
@@ -60,11 +63,14 @@ import Encyptoo from 'encryptoo';
 const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
+## Caracteristicas
+ - Troca de chaves Diffie Hellaman
+ - Criptografia AES
 ## Atualizações futuras
 
 - [ ] Adicionar suporte para Typescript.
 - [ ] Adicionar método de sign.
 - [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
-### 1.0.5 ✅
+### 1.0.6 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.

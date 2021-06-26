@@ -1,6 +1,6 @@
 {
   "name": "encryptoo",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Uma lib de criptografia",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "diffie-hellman": "^5.0.3",
     "safe-buffer": "^5.2.1"
   },
+  "keywords": ["AES", "Cryptography", "Security", "Diffie Hellman"],
   "author": "André Oliveira - andreluisoliveira013@gmail.com",
   "license": "none"
 }
