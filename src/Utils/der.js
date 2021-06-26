@@ -1,4 +1,4 @@
-
+//Código responsável por transformar a chave diffieHellman em uma chave der
 const Prime = require('./primes.json');
 const { Buffer } = require('safe-buffer');
 
@@ -35,7 +35,6 @@ function convertDerToDiffieHellman (publicKey) {
   let DerToDiffiHellman = publicKey.substr(derPadding.length, publicKey.length);
   return DerToDiffiHellman;
 }
-
 
 module.exports = {
   convertDerToDiffieHellman,
