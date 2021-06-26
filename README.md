@@ -29,26 +29,14 @@ const Encryptoo = require('encyptoo');
 const localPublicKey = Encryptoo.init();
 ```
 ### Troca de chaves
-<div class="headerTrocaDeChaves" style="display: flex; justify-content: space-around">
-  <span>Front</span>
-  <span>|</span>
-  <span>Back</span>
-</div>
-<div>
-    <span>------------------------------------------------------------------------------------------------</span>
-</div>
 
-```json
+O fluxo de troca de chaves deve partir do frontend para o backend. O front deve montar um objeto semelhate esse abaixo:
+```javascript
   {
     clientPublicKey: Encryptoo.init()
   }
 ```
 Após montar o objeto deverá realizar uma requisição post ao seu backend.
-
-<div style="display: flex; justify-content: center; align-items: center">
-<span>⬇️⬇️⬇️</span>
-<br></br>
-</div>
 
 Após receber a requisição no backend você deve enviar sua chave publica como resposta da requisição, para o frontend.
 ```javascript
@@ -72,6 +60,11 @@ import Encyptoo from 'encryptoo';
 const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
+## Atualizações futuras
+
+- [ ] Adicionar suporte para Typescript.
+- [ ] Adicionar método de sign.
+- [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
-### 1.0.4 ✅
+### 1.0.5 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
