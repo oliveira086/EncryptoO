@@ -2,7 +2,7 @@
 const Crypto = require ('diffie-hellman/browser');
 const {createCipheriv, createDecipheriv, pbkdf2Sync} = require ( 'browser-crypto');
 const Prime = require ( './Utils/primes.json');
-const  { Buffer } = require ( 'safe-buffer');
+const  { Buffer } = require( 'safe-buffer');
 const Der = require ( './Utils/der');
 // ======================
 
@@ -47,7 +47,7 @@ function init () {
 function computeSecret (serverPublicKey) {
   const ServerPublicKey = Der.convertDerToDiffieHellman(serverPublicKey)
   const DiffieHellman = Crypto.createDiffieHellman(_primeNumber);
-  DiffieHellman.setPublicKey(Buffer.from(ServerPublicKey), 'hex');
+  DiffieHellman.setPublicKey(Buffer.from(ServerPublicKey, 'hex'));
   DiffieHellman.setPrivateKey(Buffer.from(_clientPrivateKey, 'hex'));
   let secret = DiffieHellman.computeSecret(Buffer.from(ServerPublicKey, 'hex'));
   _iv = secret.toString('hex');
