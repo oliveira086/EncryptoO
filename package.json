@@ -1,11 +1,15 @@
 {
-  "name": "cryptoo",
-  "version": "1.0.0",
-  "description": "",
+  "name": "encryptoo",
+  "version": "1.0.5",
+  "description": "Uma lib de criptografia",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node teste.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oliveira086/CryptoO.git"
   },
   "dependencies": {
     "browser-crypto": "^1.4.0",
@@ -13,5 +17,6 @@
     "safe-buffer": "^5.2.1"
   },
   "author": "André Oliveira - andreluisoliveira013@gmail.com",
-  "license": "ISC"
+  "license": "none"
 }
+
