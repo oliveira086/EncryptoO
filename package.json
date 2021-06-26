@@ -1,11 +1,10 @@
 {
   "name": "cryptoo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Uma lib de criptografia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node teste.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "browser-crypto": "^1.4.0",
