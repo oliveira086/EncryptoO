@@ -156,12 +156,12 @@ function decrypt(encryptedText, serverPublicKey) {
 
 // ================================================================
 /*
-  Função que realiza a comparação do texto fornecido com o texto encriptado
+  Função que realiza a comparação do texto fornecido com o criptograma
   utilizando AES-256-CBC
 
   @params {
-    plainText: O texto que será comparado com o encriptado
-    encryptedText: O texto encriptado
+    plainText: O texto que sera comparado
+    encryptedText: O texto encriptado como referencia
     serverPublicKey: Chave publica que o servidor retorna no momento
     da troca de chaves 
   }
@@ -172,23 +172,14 @@ function decrypt(encryptedText, serverPublicKey) {
 */
 
 function compare(plainText, encryptedText, serverPublicKey) {
-  let textEncryptedSplit = encryptedText.split("\\");
   let key = Buffer.from(computeSecret(serverPublicKey));
+  let iv = generateRandomIv(serverPublicKey);
+  const initialEncrypt = createCipheriv("aes-256-cbc", key, iv);
+  initialEncrypt.setAutoPadding(true);
+  let cipherText = initialEncrypt.update(plainText, null, "base64");
+  cipherText += initialEncrypt.final("base64");
 
-  const initalDecrypt = createDecipheriv(
-    "aes-256-cbc",
-    key,
-    Buffer.from(textEncryptedSplit[1], "base64")
-  );
-  initalDecrypt.setAutoPadding(true);
-  let decryptedCompare = initalDecrypt.update(
-    textEncryptedSplit[0],
-    "base64",
-    "utf-8"
-  );
-  decryptedCompare += initalDecrypt.final("utf-8");
-
-  if (plainText == decryptedCompare) {
+  if (cipherText == encryptedText) {
     return true;
   }
   return false;
