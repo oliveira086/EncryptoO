@@ -5,4 +5,5 @@ module.exports = {
   encrypt: CryptO.encrypt,
   decrypt: CryptO.decrypt,
   compare: CryptO.compare,
+  setSecret: CryptO.setSecret
 };

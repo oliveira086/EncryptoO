@@ -15,6 +15,7 @@ const _primeNumber = Buffer.from(Prime.prime, "hex");
 let _clientPublicKey;
 let _clientPrivateKey;
 let _iv;
+let _key;
 // ================================
 
 /*
@@ -58,11 +59,49 @@ function computeSecret(serverPublicKey) {
   DiffieHellman.setPublicKey(Buffer.from(ServerPublicKey, "hex"));
   DiffieHellman.setPrivateKey(Buffer.from(_clientPrivateKey, "hex"));
   let secret = DiffieHellman.computeSecret(Buffer.from(ServerPublicKey, "hex"));
+  _key = secret.toString("hex").substr(0, 32).toUpperCase();
   _iv = secret.toString("hex");
-
-  return secret.toString("hex").substr(0, 32).toUpperCase();
 }
 // ===================================================================
+
+/*
+  Função criada para fazer o controle da geração de uma nova segredo
+  ou utilizar o já gerado ou inserido
+  @params {
+    serverPublicKey: Chave publica que o servidor retorna no momento
+    da troca de chaves 
+  }
+  @return {
+    O retorno dessa função e um novo segredo ou aquele inserido em
+    um momento anterior
+  }
+*/
+function getSecret(serverPublicKey) {
+  if(_key == "" || _key == undefined) {
+    computeSecret(serverPublicKey);
+  }
+  return _key;
+}
+// ===============================================================
+
+/*
+  Função criada para inserir uma secredo criptográfico já existente
+  @params {
+    secret: Segredo criptografico resultante de uma troca de chaves
+  }
+  @return {
+    O retorno dessa função e apenas uma confirmação de sucesso ou
+    problema com o tamanho da chave
+  }
+*/
+
+function setSecret(secret) {
+  if(secret.length == 32) {
+    _key = secret;
+    return true;
+  }
+  return false; 
+}
 
 /*
   Função criada para gerar um initial vector randomico a cada troca
@@ -78,8 +117,8 @@ function computeSecret(serverPublicKey) {
   ~Essa implementação poderá mudar no futuro por questões de melhorias
   de segurança na lib~
 */
-function generateRandomIv(serverPublicKey) {
-  return pbkdf2Sync(computeSecret(serverPublicKey), "salt", 1, 16, "sha512");
+function generateRandomIv() {
+  return pbkdf2Sync(_key, "salt", 1, 16, "sha512");
 }
 
 // ===================================================================
@@ -101,8 +140,8 @@ function generateRandomIv(serverPublicKey) {
 */
 
 function encrypt(plainText, serverPublicKey) {
-  let key = Buffer.from(computeSecret(serverPublicKey));
-  let iv = generateRandomIv(serverPublicKey);
+  let key = Buffer.from(getSecret(serverPublicKey));
+  let iv = generateRandomIv();
   const initialEncrypt = createCipheriv("aes-256-cbc", key, iv);
   initialEncrypt.setAutoPadding(true);
   let encrypted = initialEncrypt.update(plainText, null, "base64");
@@ -127,7 +166,7 @@ function encrypt(plainText, serverPublicKey) {
 */
 function decrypt(encryptedText, serverPublicKey) {
   let textEncryptedSplit = encryptedText.split("\\");
-  let key = Buffer.from(computeSecret(serverPublicKey));
+  let key = Buffer.from(getSecret(serverPublicKey));
 
   const initalDecrypt = createDecipheriv(
     "aes-256-cbc",
@@ -183,4 +222,5 @@ module.exports = {
   encrypt,
   decrypt,
   compare,
+  setSecret
 };
