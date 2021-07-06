@@ -156,7 +156,7 @@ function decrypt(encryptedText, serverPublicKey) {
 
 // ================================================================
 /*
-  Função que realiza a comparação do texto fornecido com o backend
+  Função que realiza a comparação do texto fornecido com o texto encriptado
   utilizando AES-256-CBC
 
   @params {
