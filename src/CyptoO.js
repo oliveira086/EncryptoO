@@ -1,17 +1,13 @@
 // Importações necessárias
-const Crypto = require("diffie-hellman/browser");
-const {
-  createCipheriv,
-  createDecipheriv,
-  pbkdf2Sync,
-} = require("browser-crypto");
-const Prime = require("./Utils/primes.json");
-const { Buffer } = require("safe-buffer");
-const Der = require("./Utils/der");
+const Crypto = require ('diffie-hellman/browser');
+const {createCipheriv, createDecipheriv, pbkdf2Sync} = require ( 'browser-crypto');
+const Prime = require ( './Utils/primes.json');
+const  { Buffer } = require( 'safe-buffer');
+const Der = require ( './Utils/der');
 // ======================
 
 // Declarações de variáveis globais
-const _primeNumber = Buffer.from(Prime.prime, "hex");
+const _primeNumber = Buffer.from(Prime.prime, 'hex');
 let _clientPublicKey;
 let _clientPrivateKey;
 let _iv;
@@ -25,18 +21,13 @@ let _iv;
   }
 */
 
-function init() {
+function init () {
   const DiffieHellman = Crypto.createDiffieHellman(_primeNumber);
   let generateKeys = DiffieHellman.generateKeys();
-  _clientPublicKey = DiffieHellman.getPublicKey().toString("hex").toUpperCase();
-  _clientPrivateKey = DiffieHellman.getPrivateKey()
-    .toString("hex")
-    .toUpperCase();
+  _clientPublicKey = DiffieHellman.getPublicKey().toString('hex').toUpperCase();
+  _clientPrivateKey = DiffieHellman.getPrivateKey().toString('hex').toUpperCase();
 
-  let publicKeyInDerFormat = Der.convertDiffieHellmanToDer(
-    generateKeys,
-    DiffieHellman.getGenerator()
-  );
+  let publicKeyInDerFormat = Der.convertDiffieHellmanToDer(generateKeys, DiffieHellman.getGenerator());
   return publicKeyInDerFormat.toUpperCase();
 }
 // ======================================================================
@@ -53,15 +44,15 @@ function init() {
   }
 
 */
-function computeSecret(serverPublicKey) {
-  const ServerPublicKey = Der.convertDerToDiffieHellman(serverPublicKey);
+function computeSecret (serverPublicKey) {
+  const ServerPublicKey = Der.convertDerToDiffieHellman(serverPublicKey)
   const DiffieHellman = Crypto.createDiffieHellman(_primeNumber);
-  DiffieHellman.setPublicKey(Buffer.from(ServerPublicKey, "hex"));
-  DiffieHellman.setPrivateKey(Buffer.from(_clientPrivateKey, "hex"));
-  let secret = DiffieHellman.computeSecret(Buffer.from(ServerPublicKey, "hex"));
-  _iv = secret.toString("hex");
+  DiffieHellman.setPublicKey(Buffer.from(ServerPublicKey, 'hex'));
+  DiffieHellman.setPrivateKey(Buffer.from(_clientPrivateKey, 'hex'));
+  let secret = DiffieHellman.computeSecret(Buffer.from(ServerPublicKey, 'hex'));
+  _iv = secret.toString('hex');
 
-  return secret.toString("hex").substr(0, 32).toUpperCase();
+  return secret.toString('hex').substr(0, 32).toUpperCase();
 }
 // ===================================================================
 
@@ -82,8 +73,8 @@ function computeSecret(serverPublicKey) {
   de segurança na lib~
 
 */
-function generateRandomIv(serverPublicKey) {
-  return pbkdf2Sync(computeSecret(serverPublicKey), "salt", 1, 16, "sha512");
+function generateRandomIv (serverPublicKey) {
+  return pbkdf2Sync(computeSecret(serverPublicKey), 'salt', 1, 16, 'sha512')
 }
 
 // ===================================================================
@@ -107,15 +98,15 @@ function generateRandomIv(serverPublicKey) {
 
 */
 
-function encrypt(plainText, serverPublicKey) {
+function encrypt (plainText, serverPublicKey) {
   let key = Buffer.from(computeSecret(serverPublicKey));
   let iv = generateRandomIv(serverPublicKey);
-  const initialEncrypt = createCipheriv("aes-256-cbc", key, iv);
+  const initialEncrypt = createCipheriv('aes-256-cbc', key, iv);
   initialEncrypt.setAutoPadding(true);
-  let encrypted = initialEncrypt.update(plainText, null, "base64");
-  encrypted += initialEncrypt.final("base64");
+  let encrypted = initialEncrypt.update(plainText, null, 'base64');
+  encrypted += initialEncrypt.final('base64');
 
-  return `${encrypted}\\${iv.toString("base64")}`;
+  return `${encrypted}\\${iv.toString('base64')}`;
 }
 
 // ================================================================
@@ -134,24 +125,16 @@ function encrypt(plainText, serverPublicKey) {
     São eles: plaintextEncriptado\\initialVector(iv).
   }
 */
-function decrypt(encryptedText, serverPublicKey) {
-  let textEncryptedSplit = encryptedText.split("\\");
+function decrypt (encryptedText, serverPublicKey) {
+  let textEncryptedSplit = encryptedText.split('\\');
   let key = Buffer.from(computeSecret(serverPublicKey));
 
-  const initalDecrypt = createDecipheriv(
-    "aes-256-cbc",
-    key,
-    Buffer.from(textEncryptedSplit[1], "base64")
-  );
+  const initalDecrypt = createDecipheriv('aes-256-cbc', key, Buffer.from(textEncryptedSplit[1], 'base64'));
   initalDecrypt.setAutoPadding(true);
-  let decrypted = initalDecrypt.update(
-    textEncryptedSplit[0],
-    "base64",
-    "utf-8"
-  );
-  decrypted += initalDecrypt.final("utf-8");
+  let decrypted = initalDecrypt.update(textEncryptedSplit[0], 'base64', 'utf-8');
+  decrypted += initalDecrypt.final('utf-8');
 
-  return decrypted;
+  return decrypted
 }
 
 // ================================================================
@@ -172,17 +155,22 @@ function decrypt(encryptedText, serverPublicKey) {
 */
 
 function compare(plainText, encryptedText, serverPublicKey) {
+  let textEncryptedSplit = encryptedText.split('\\');
   let key = Buffer.from(computeSecret(serverPublicKey));
-  let iv = generateRandomIv(serverPublicKey);
-  const initialEncrypt = createCipheriv("aes-256-cbc", key, iv);
-  initialEncrypt.setAutoPadding(true);
-  let cipherText = initialEncrypt.update(plainText, null, "base64");
-  cipherText += initialEncrypt.final("base64");
+  let iv = Buffer.from(textEncryptedSplit[1], 'base64') 
 
-  if (cipherText == encryptedText) {
-    return true;
+  const initialEncrypt = createCipheriv('aes-256-cbc', key, iv);
+  initialEncrypt.setAutoPadding(true);
+  let cipherText = initialEncrypt.update(plainText, null, 'base64');
+  cipherText += initialEncrypt.final('base64');
+
+  const comparedText = `${cipherText}\\${iv.toString('base64')}`
+
+  if (comparedText == encryptedText)
+  {
+    return true
   }
-  return false;
+  return false
 }
 
 module.exports = {
