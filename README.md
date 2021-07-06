@@ -68,13 +68,14 @@ const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 import Encryptoo from 'encryptoo';
 const verifySing = Encryptoo.compare(plainText, cryptogram, serverPublicKey);
 ```
-### Get secret ➡️🔑
+### Set secret 🔑⬅️
 ```javascript
 import Encryptoo from 'encryptoo';
-Encryptoo.setSecret(secret)
+Encryptoo.setSecret(secret);
 ```
+O segredo deve ter 32 bytes
 
-### Set secret 🔑⬅️
+### Get secret 🔑➡️
 ```javascript
 import Encryptoo from 'encryptoo';
 const secret = Encryptoo.getSecret(serverPublicKey);
