@@ -1,6 +1,6 @@
 {
   "name": "encryptoo",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Uma lib de criptografia",
   "main": "index.js",
   "scripts": {

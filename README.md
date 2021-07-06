@@ -63,14 +63,22 @@ import Encyptoo from 'encryptoo';
 const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
 
+### Compare 🤝
+```javascript
+import Encrypto from 'encryptoo';
+const verifySing = Encrypto.compare(plainText, cryptogram, serverPublicKey);
+```
+
 ## Caracteristicas
  - Troca de chaves Diffie Hellaman
  - Criptografia AES
 ## Atualizações futuras
 
 - [ ] Adicionar suporte para Typescript.
-- [ ] Adicionar método de sign.
+- [x] Adicionar método de sign - Implementado por @fgalmeida
 - [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
+### 1.0.7 ✅
+Implementação do metodo de compare(sign) para verificar se aquele criptograma realmente foi crifrado por o sistema devido.
 ### 1.0.6 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
