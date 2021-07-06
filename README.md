@@ -79,6 +79,8 @@ const verifySing = Encrypto.compare(plainText, cryptogram, serverPublicKey);
 - [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
 ### 1.0.7 ✅
-Implementação do metodo de compare(sign) para verificar se aquele criptograma realmente foi crifrado por o sistema devido.
+- Implementação do metodo de compare(sign) para verificar se aquele criptograma realmente foi crifrado por o sistema devido.
+- Foi adicionado os metodos de inserção de um segredo criptografico e a sua visualização
+
 ### 1.0.6 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
