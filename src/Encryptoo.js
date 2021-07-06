@@ -86,6 +86,7 @@ function getSecret(serverPublicKey) {
 
 /*
   Função criada para inserir uma secredo criptográfico já existente
+  A chave criptografica deve ter 32 bytes
   @params {
     secret: Segredo criptografico resultante de uma troca de chaves
   }
@@ -102,6 +103,8 @@ function setSecret(secret) {
   }
   return false; 
 }
+
+// ================================================================
 
 /*
   Função criada para gerar um initial vector randomico a cada troca
@@ -222,5 +225,6 @@ module.exports = {
   encrypt,
   decrypt,
   compare,
-  setSecret
+  setSecret,
+  getSecret
 };

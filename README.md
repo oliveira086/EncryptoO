@@ -65,11 +65,22 @@ const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 
 ### Compare 🤝
 ```javascript
-import Encrypto from 'encryptoo';
-const verifySing = Encrypto.compare(plainText, cryptogram, serverPublicKey);
+import Encryptoo from 'encryptoo';
+const verifySing = Encryptoo.compare(plainText, cryptogram, serverPublicKey);
+```
+### Get secret ➡️🔑
+```javascript
+import Encryptoo from 'encryptoo';
+Encryptoo.setSecret(secret)
 ```
 
-## Caracteristicas
+### Set secret 🔑⬅️
+```javascript
+import Encryptoo from 'encryptoo';
+const secret = Encryptoo.getSecret(serverPublicKey);
+```
+
+## Caracteristicas 
  - Troca de chaves Diffie Hellaman
  - Criptografia AES
 ## Atualizações futuras
