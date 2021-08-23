@@ -155,6 +155,33 @@ function encrypt(plainText, serverPublicKey) {
 
 // ================================================================
 /*
+  Função que realiza a criptografia de um objeto com vários
+  valores utilizando AES-256-CBC
+  @params {
+    Object: O texto que sera criptografado
+    serverPublicKey: Chave publica que o servidor retorna no momento
+    da troca de chaves 
+  }
+  @return {
+    Essa função retorna um objeto chave valor
+    A chave e o mesmo nome fornecido e o valor
+    e o resultado da criptografia.
+  }
+*/
+
+async function encryptBody(object, serverPublicKey) {
+  let keys = Object.keys(object);
+
+  const payload = keys.reduce((accumulator, currentValue) => {
+    accumulator[currentValue] = await encrypt(object[currentValue], serverPublicKey);
+    return accumulator;
+  }, {});
+
+  return payload;
+}
+
+// ================================================================
+/*
   Função que realiza a descriptografia do criptograma fornecido
   utilizando AES-256-CBC
   @params {
@@ -185,6 +212,33 @@ function decrypt(encryptedText, serverPublicKey) {
   decrypted += initalDecrypt.final("utf-8");
 
   return decrypted;
+}
+
+// ================================================================
+/*
+  Função que realiza a descriptografia de um objeto com vários
+  criptogramas utilizando AES-256-CBC
+  @params {
+    Object: O texto que sera descriptografado
+    serverPublicKey: Chave publica que o servidor retorna no momento
+    da troca de chaves 
+  }
+  @return {
+    Essa função retorna um objeto chave valor
+    A chave e o mesmo nome fornecido e o valor
+    e o resultado da descriptografia.
+  }
+*/
+
+async function decryptBody (object, serverPublicKey) {
+  let keys = Object.keys(object);
+
+  const payload = keys.reduce((accumulator, currentValue) => {
+    accumulator[currentValue] = await decrypt(object[currentValue], serverPublicKey);
+    return accumulator;
+  }, {});
+
+  return payload;
 }
 
 // ================================================================
@@ -223,7 +277,9 @@ function compare(plainText, encryptedText, serverPublicKey) {
 module.exports = {
   init,
   encrypt,
+  encryptBody,
   decrypt,
+  decryptBody,
   compare,
   setSecret,
   getSecret

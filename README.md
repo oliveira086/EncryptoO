@@ -82,7 +82,7 @@ const secret = Encryptoo.getSecret(serverPublicKey);
 ```
 
 ## Caracteristicas 
- - Troca de chaves Diffie Hellaman
+ - Troca de chaves Diffie Hellman
  - Criptografia AES
 ## Atualizações futuras
 
