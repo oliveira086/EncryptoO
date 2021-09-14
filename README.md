@@ -56,13 +56,22 @@ Depois de receber a chave publica do frontend você decide a melhor forma de atr
 import Encryptoo from 'encryptoo';
 const cryptogram = Encryptoo.encrypt(plainText, serverPublicKey);
 ```
+### EncryptBody 🔒
+```javascript
+import Encryptoo from 'encryptoo';
+const cryptogram = Encryptoo.encryptBody(object, serverPublicKey);
+```
 
 ### Decrypt 🔓
 ```javascript
 import Encyptoo from 'encryptoo';
 const plainText = Encryptoo.decrypt(textEncrypted, serverPublicKey);
 ```
-
+### DecryptBody 🔓
+```javascript
+import Encyptoo from 'encryptoo';
+const plainText = Encryptoo.decryptBody(object, serverPublicKey);
+```
 ### Compare 🤝
 ```javascript
 import Encryptoo from 'encryptoo';
@@ -82,7 +91,7 @@ const secret = Encryptoo.getSecret(serverPublicKey);
 ```
 
 ## Caracteristicas 
- - Troca de chaves Diffie Hellaman
+ - Troca de chaves Diffie Hellman
  - Criptografia AES
 ## Atualizações futuras
 
@@ -90,6 +99,8 @@ const secret = Encryptoo.getSecret(serverPublicKey);
 - [x] Adicionar método de sign - Implementado por @fgalmeida
 - [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
+### 1.0.9 ✅
+- Nessa versão foi implementada o decrypt body em versão beta, essa funcionalidade visa receber um objeto com os valores criptografados e devolver eles abertos e vice versa
 
 ### 1.0.8 ✅
 - Implementação de types e suporte para typescript

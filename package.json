@@ -1,6 +1,6 @@
 {
   "name": "encryptoo",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Uma lib de criptografia",
   "types": "index.d.js",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/oliveira086/CryptoO.git"
+    "url": "https://github.com/oliveira086/EncryptoO.git"
   },
   "dependencies": {
     "browser-crypto": "^1.4.0",
