@@ -1,11 +1,11 @@
 {
   "name": "encryptoo",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Uma lib de criptografia",
   "types": "index.d.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node teste.js"
   },
   "repository": {
@@ -26,6 +26,9 @@
   "author": "André Oliveira - andreluisoliveira013@gmail.com",
   "license": "none",
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.2.0",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
   }
 }
