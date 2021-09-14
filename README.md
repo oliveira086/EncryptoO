@@ -101,12 +101,10 @@ const secret = Encryptoo.getSecret(serverPublicKey);
 ## Notas de Atualizações
 ### 1.0.9 ✅
 - Nessa versão foi implementada o decrypt body em versão beta, essa funcionalidade visa receber um objeto com os valores criptografados e devolver eles abertos e vice versa
-
 ### 1.0.8 ✅
 - Implementação de types e suporte para typescript
 ### 1.0.7 ✅
 - Implementação do metodo de compare(sign) para verificar se aquele criptograma realmente foi crifrado por o sistema devido.
 - Foi adicionado os metodos de inserção de um segredo criptografico e a sua visualização
-
 ### 1.0.6 ✅
 Implementação dos metódos principais de encrypt e decrypt utilizando a troca de chaves Diffie Hellman e criptografia AES.
