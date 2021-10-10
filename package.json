@@ -1,23 +1,34 @@
 {
   "name": "encryptoo",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "Uma lib de criptografia",
+  "types": "index.d.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node teste.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/oliveira086/CryptoO.git"
+    "url": "https://github.com/oliveira086/EncryptoO.git"
   },
   "dependencies": {
     "browser-crypto": "^1.4.0",
     "diffie-hellman": "^5.0.3",
     "safe-buffer": "^5.2.1"
   },
-  "keywords": ["AES", "Cryptography", "Security", "Diffie Hellman"],
+  "keywords": [
+    "AES",
+    "Cryptography",
+    "Security",
+    "Diffie Hellman"
+  ],
   "author": "André Oliveira - andreluisoliveira013@gmail.com",
-  "license": "none"
+  "license": "none",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.2.0",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
+  }
 }
-

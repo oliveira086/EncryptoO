@@ -155,6 +155,29 @@ function encrypt(plainText, serverPublicKey) {
 
 // ================================================================
 /*
+  Função que realiza a criptografia de um objeto com vários
+  valores utilizando AES-256-CBC
+  @params {
+    Object: O texto que sera criptografado
+    serverPublicKey: Chave publica que o servidor retorna no momento
+    da troca de chaves 
+  }
+  @return {
+    Essa função retorna um objeto chave valor
+    A chave e o mesmo nome fornecido e o valor
+    e o resultado da criptografia.
+  }
+*/
+
+function encryptBody(object, serverPublicKey) {
+  let objectStringfy = JSON.stringify(object);
+  let cryptogram = encrypt(objectStringfy, serverPublicKey);
+
+  return cryptogram;
+}
+
+// ================================================================
+/*
   Função que realiza a descriptografia do criptograma fornecido
   utilizando AES-256-CBC
   @params {
@@ -185,6 +208,29 @@ function decrypt(encryptedText, serverPublicKey) {
   decrypted += initalDecrypt.final("utf-8");
 
   return decrypted;
+}
+
+// ================================================================
+/*
+  Função que realiza a descriptografia de um objeto com vários
+  criptogramas utilizando AES-256-CBC
+  @params {
+    Object: O texto que sera descriptografado
+    serverPublicKey: Chave publica que o servidor retorna no momento
+    da troca de chaves 
+  }
+  @return {
+    Essa função retorna um objeto chave valor
+    A chave e o mesmo nome fornecido e o valor
+    e o resultado da descriptografia.
+  }
+*/
+
+function decryptBody (object, serverPublicKey) {
+  let cryptogram = decrypt(object, serverPublicKey);
+  let objectParsed = JSON.parse(cryptogram);
+
+  return objectParsed;
 }
 
 // ================================================================
@@ -223,7 +269,9 @@ function compare(plainText, encryptedText, serverPublicKey) {
 module.exports = {
   init,
   encrypt,
+  encryptBody,
   decrypt,
+  decryptBody,
   compare,
   setSecret,
   getSecret
