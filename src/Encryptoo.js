@@ -169,15 +169,11 @@ function encrypt(plainText, serverPublicKey) {
   }
 */
 
-async function encryptBody(object, serverPublicKey) {
-  let keys = Object.keys(object);
+function encryptBody(object, serverPublicKey) {
+  let objectStringfy = JSON.stringify(object);
+  let cryptogram = encrypt(objectStringfy, serverPublicKey);
 
-  const payload = keys.reduce((accumulator, currentValue) => {
-    accumulator[currentValue] = await encrypt(object[currentValue], serverPublicKey);
-    return accumulator;
-  }, {});
-
-  return payload;
+  return cryptogram;
 }
 
 // ================================================================
@@ -230,15 +226,11 @@ function decrypt(encryptedText, serverPublicKey) {
   }
 */
 
-async function decryptBody (object, serverPublicKey) {
-  let keys = Object.keys(object);
+function decryptBody (object, serverPublicKey) {
+  let cryptogram = decrypt(object, serverPublicKey);
+  let objectParsed = JSON.parse(cryptogram);
 
-  const payload = keys.reduce((accumulator, currentValue) => {
-    accumulator[currentValue] = await decrypt(object[currentValue], serverPublicKey);
-    return accumulator;
-  }, {});
-
-  return payload;
+  return objectParsed;
 }
 
 // ================================================================

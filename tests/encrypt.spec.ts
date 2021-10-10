@@ -1,4 +1,4 @@
-import { encryptBody, init } from "../index"
+import { encryptBody, decryptBody, init } from "../index"
 
 describe('encrypt-body', ()=> {
 
@@ -35,10 +35,11 @@ describe('encrypt-body', ()=> {
         const secret = init();
         console.log(secret)
 
-        const encrypt = async () => await encryptBody<Body>(body, secret);
-        const encrypted = await encrypt();
-        expect(encrypted).toBeDefined();
-        expect(encrypted).toHaveProperty(['id', 'name', 'age', 'favoriteMovies', 'child']);
-        console.log(encrypted);
+        // const encrypt = () => encryptBody<Body>(body, secret);
+        // const encrypted = await encrypt();
+        // expect(encrypted).toBeDefined();
+        // expect(encrypted).toHaveProperty(['id', 'name', 'age', 'favoriteMovies', 'child']);
+        let payload = encryptBody<Body>(body, secret);
+        console.log(decryptBody<String>(payload, secret))
     })
 })

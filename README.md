@@ -95,8 +95,8 @@ const secret = Encryptoo.getSecret(serverPublicKey);
  - Criptografia AES
 ## Atualizações futuras
 
-- [x] Adicionar suporte para Typescript.
-- [x] Adicionar método de sign - Implementado por @fgalmeida
+- [x] Adicionar suporte para Typescript - Implementado por @4lessandrodev.
+- [x] Adicionar método de sign - Implementado por @fgalmeida.
 - [ ] Adicionar criptografia RSA.
 ## Notas de Atualizações
 
