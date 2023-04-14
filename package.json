@@ -13,6 +13,7 @@
     "url": "https://github.com/oliveira086/EncryptoO.git"
   },
   "dependencies": {
+    "bigint-crypto-utils": "^3.1.8",
     "browser-crypto": "^1.4.0",
     "diffie-hellman": "^5.0.3",
     "safe-buffer": "^5.2.1"
