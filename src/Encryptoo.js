@@ -69,17 +69,18 @@ function computeSecret(serverPublicKey) {
   ou utilizar o já gerado ou inserido
   @params {
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     O retorno dessa função e um novo segredo ou aquele inserido em
     um momento anterior
   }
 */
-function getSecret(serverPublicKey) {
-  if(_key == "" || _key == undefined) {
+function getSecret(serverPublicKey, isServer = false) {
+  if(_key == "" || _key == undefined || isServer == true) {
     computeSecret(serverPublicKey);
   }
+
   return _key;
 }
 // ===============================================================
@@ -101,7 +102,7 @@ function setSecret(secret) {
     _key = secret;
     return true;
   }
-  return false; 
+  return false;
 }
 
 // ================================================================
@@ -111,7 +112,7 @@ function setSecret(secret) {
   de chaves realizada
   @params {
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     O retorno dessa função e uma nova chave criptografica que sera
@@ -132,7 +133,7 @@ function generateRandomIv() {
   @params {
     plainText: O texto que sera criptografado
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     O valor encriptado e concatenado com outros valores ambos em base64.
@@ -160,7 +161,7 @@ function encrypt(plainText, serverPublicKey) {
   @params {
     Object: O texto que sera criptografado
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     Essa função retorna um objeto chave valor
@@ -183,7 +184,7 @@ function encryptBody(object, serverPublicKey) {
   @params {
     plainText: O texto que sera criptografado
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     O valor encriptado e concatenado com outros valores ambos em base64.
@@ -217,7 +218,7 @@ function decrypt(encryptedText, serverPublicKey) {
   @params {
     Object: O texto que sera descriptografado
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     Essa função retorna um objeto chave valor
@@ -241,7 +242,7 @@ function decryptBody (object, serverPublicKey) {
     plainText: O texto que sera comparado
     encryptedText: O texto encriptado como referencia
     serverPublicKey: Chave publica que o servidor retorna no momento
-    da troca de chaves 
+    da troca de chaves
   }
   @return {
     Um boolean [True or False]

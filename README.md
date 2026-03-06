@@ -1,6 +1,6 @@
 # EncryptoO 🔐
 
-### Uma biblioteca de criptografia com troca de chaves embutida
+### Biblioteca de criptografia com troca de chaves Diffie Hellman.
 ```
 Created by André Oliveira (@oliveira086)
 ```
@@ -89,8 +89,15 @@ O segredo deve ter 32 bytes
 import Encryptoo from 'encryptoo';
 const secret = Encryptoo.getSecret(serverPublicKey);
 ```
+Função importante principalmente para o lado do servidor. Em toda nova troca de chaves do lado do servidor você deve passar o parametro isServer = true. Exemplo:
 
-## Caracteristicas 
+```javascript
+  Encryptoo.getSecret(serverPublicKey, true);
+```
+
+Assim em toda nova troca de chaves do lado do servidor a chave será gerada corretamente.
+
+## Caracteristicas
  - Troca de chaves Diffie Hellman
  - Criptografia AES
 ## Atualizações futuras
@@ -98,8 +105,11 @@ const secret = Encryptoo.getSecret(serverPublicKey);
 - [x] Adicionar suporte para Typescript - Implementado por @4lessandrodev.
 - [x] Adicionar método de sign - Implementado por @fgalmeida.
 - [ ] Adicionar criptografia RSA.
+- [ ] Encapsular o SHA3
 ## Notas de Atualizações
 
+### 1.1.0 ✅
+- Ajuste da função do calculo do secredo criptografico para multi troca de chaves. Ajustado para multi instâncias e multi usuários.
 ### 1.0.10 ✅
 - Implementação de types e suporte para typescript para as funções de encrypt e decrypt body
 ### 1.0.9 ✅
