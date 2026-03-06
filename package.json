@@ -1,7 +1,7 @@
 {
   "name": "encryptoo",
-  "version": "1.0.10",
-  "description": "Uma lib de criptografia",
+  "version": "1.1.0",
+  "description": "Biblioteca de Criptografia com troca de chaves Diffie Hellman.",
   "types": "index.d.js",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "Security",
     "Diffie Hellman"
   ],
-  "author": "André Oliveira - andreluisoliveira013@gmail.com",
+  "author": "@oliveira086 - andreluisoliveira013@gmail.com",
   "license": "none",
   "devDependencies": {
     "@types/jest": "^27.0.1",
