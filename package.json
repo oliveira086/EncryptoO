@@ -1,8 +1,8 @@
 {
   "name": "encryptoo",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Biblioteca de Criptografia com troca de chaves Diffie Hellman.",
-  "types": "index.d.js",
+  "types": "index.d.ts",
   "main": "index.js",
   "scripts": {
     "test": "jest",
